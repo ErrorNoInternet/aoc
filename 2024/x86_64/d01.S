@@ -32,14 +32,14 @@ parse_numbers:
 
 sort_numbers:
 	mov  rsi, offset left_nums
-	call bubblesort
+	call quicksort
 
 	mov  rsi, offset right_nums
-	call bubblesort
+	call quicksort
 
 solve:
-	mov ebx, [left_nums + r10 * 4]
-	mov ecx, [right_nums + r10 * 4]
+	mov ebx, [left_nums + r12 * 4]
+	mov ecx, [right_nums + r12 * 4]
 
 	xor  rdx, rdx
 	mov  dl, [counts + rbx]
@@ -53,8 +53,8 @@ solve:
 	sub ebx, ecx
 	add r14, rbx
 
-	inc r10
-	cmp r8, r10
+	inc r12
+	cmp r8, r12
 	jne solve
 
 	mov  rdi, offset output
