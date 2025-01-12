@@ -1,5 +1,6 @@
 mod day01;
 mod day02;
+mod day03;
 
 pub trait Solution {
     fn part1(&self, _input: &str) -> String {
@@ -15,6 +16,7 @@ pub fn get_solver(day: usize) -> Box<dyn Solution> {
     match day {
         1 => Box::new(day01::Day01),
         2 => Box::new(day02::Day02),
+        3 => Box::new(day03::Day03),
         _ => todo!(),
     }
 }
