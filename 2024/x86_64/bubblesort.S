@@ -4,7 +4,7 @@
 
 bubblesort:
 	xor r9, r9
-	xor rcx, rcx
+	mov rcx, 1
 
 bubblesort_compare:
 	mov eax, [rsi + r9 * 4]
@@ -19,13 +19,13 @@ bubblesort_compare:
 	jmp bubblesort_compare
 
 bubblesort_swap:
-	inc rcx
+	xor rcx, rcx
 	mov [rsi + r9 * 4 - 4], ebx
 	mov [rsi + r9 * 4], eax
 	jmp bubblesort_compare
 
 bubblesort_done:
 	test rcx, rcx
-	jne  bubblesort
+	je   bubblesort
 
 	ret
