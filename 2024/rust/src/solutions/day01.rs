@@ -1,8 +1,6 @@
-use super::Solution;
-
 pub struct Day01;
 
-impl Solution for Day01 {
+impl super::Solution for Day01 {
     fn part1(&self, input: &str) -> String {
         let mut left_nums = [0u32; 1000];
         let mut right_nums = [0u32; 1000];

@@ -1,10 +1,8 @@
 use std::cmp::Ordering::{Greater, Less};
 
-use super::Solution;
-
 pub struct Day02;
 
-impl Solution for Day02 {
+impl super::Solution for Day02 {
     fn part1(&self, input: &str) -> String {
         let mut result = 0;
 
