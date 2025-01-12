@@ -5,10 +5,10 @@ pub fn build(b: *std.Build) void {
     const mode = b.standardOptimizeOption(.{});
 
     const install_all = b.step("install_all", "Install all days");
-    const run_all = b.step("run_all", "Run all days");
+    const run_all = b.step("run", "Run all days");
 
     var day: u32 = 1;
-    while (day <= 25) : (day += 1) {
+    while (day <= 2) : (day += 1) {
         const dayString = b.fmt("d{:0>2}", .{day});
         const zigFile = b.fmt("src/{s}.zig", .{dayString});
 
@@ -55,7 +55,7 @@ pub fn build(b: *std.Build) void {
 
     const test_all = b.step("test", "Run all tests");
     const all_tests = b.addTest(.{
-        .root_source_file = b.path("src/test_all.zig"),
+        .root_source_file = b.path("src/tests.zig"),
         .target = target,
         .optimize = mode,
     });
