@@ -2,39 +2,40 @@ pub struct Day03;
 
 impl super::Solution for Day03 {
     fn part1(&self, input: &str) -> String {
-        regex::Regex::new(r"mul\(\d+,\d+\)")
+        regex::Regex::new(r"mul\((\d+),(\d+)\)")
             .unwrap()
-            .find_iter(input)
-            .map(|expr| expr.as_str()[4..expr.len() - 1].split_once(",").unwrap())
-            .fold(0, |acc, split| {
-                acc + split.0.parse::<u32>().unwrap() * split.1.parse::<u32>().unwrap()
+            .captures_iter(input)
+            .fold(0, |acc, capture| {
+                acc + capture[1].parse::<i32>().unwrap() * capture[2].parse::<i32>().unwrap()
             })
             .to_string()
     }
 
     fn part2(&self, input: &str) -> String {
-        let mut result = 0;
-
         let mut should_do = true;
-        for expr in regex::Regex::new(r"mul\(\d+,\d+\)|do\(\)|don't\(\)")
+        regex::Regex::new(r"mul\((\d+),(\d+)\)|do\(\)|don't\(\)")
             .unwrap()
-            .find_iter(input)
-            .map(|matched| matched.as_str())
-        {
-            match &expr[0..3] {
-                "don" => should_do = false,
-                "do(" => should_do = true,
-                "mul" => {
-                    if should_do {
-                        let split = expr[4..expr.len() - 1].split_once(",").unwrap();
-                        result += split.0.parse::<u32>().unwrap() * split.1.parse::<u32>().unwrap();
+            .captures_iter(input)
+            .fold(0, |acc, capture| {
+                acc + match &capture[0] {
+                    "do()" => {
+                        should_do = true;
+                        0
+                    }
+                    "don't()" => {
+                        should_do = false;
+                        0
+                    }
+                    _ => {
+                        if should_do {
+                            capture[1].parse::<i32>().unwrap() * capture[2].parse::<i32>().unwrap()
+                        } else {
+                            0
+                        }
                     }
                 }
-                _ => unreachable!(),
-            }
-        }
-
-        result.to_string()
+            })
+            .to_string()
     }
 }
 
