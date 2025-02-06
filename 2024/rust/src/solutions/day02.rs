@@ -1,4 +1,4 @@
-use std::cmp::Ordering::{Greater, Less};
+use std::cmp::Ordering::{Equal, Greater, Less};
 
 pub struct Day02;
 
@@ -10,12 +10,12 @@ impl super::Solution for Day02 {
             let (mut dec, mut inc) = (true, true);
             let mut last_level: Option<u32> = None;
 
-            for level in line.split(" ").map(|numbers| numbers.parse().unwrap()) {
+            for level in line.split(' ').map(|numbers| numbers.parse().unwrap()) {
                 if let Some(last) = last_level {
                     match last.cmp(&level) {
                         Greater => inc = false,
                         Less => dec = false,
-                        _ => (),
+                        Equal => (),
                     }
 
                     let diff = last.abs_diff(level);
@@ -38,7 +38,7 @@ impl super::Solution for Day02 {
         let mut result = 0;
 
         for levels in input.lines().map(|line| {
-            line.split(" ")
+            line.split(' ')
                 .map(|numbers| numbers.parse::<i32>().unwrap())
                 .collect::<Vec<_>>()
         }) {

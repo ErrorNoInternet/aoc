@@ -6,9 +6,9 @@ impl super::Solution for Day01 {
         let mut right_nums = [0u32; 1000];
 
         for (i, line) in input.lines().enumerate() {
-            let mut space_split = line.split(" ");
+            let mut space_split = line.split(' ');
             left_nums[i] = space_split.next().unwrap().parse().unwrap();
-            right_nums[i] = space_split.last().unwrap().parse().unwrap();
+            right_nums[i] = space_split.next_back().unwrap().parse().unwrap();
         }
 
         left_nums.sort_unstable();
@@ -26,9 +26,9 @@ impl super::Solution for Day01 {
         let mut right_nums = [0u32; 1000];
 
         for (i, line) in input.lines().enumerate() {
-            let mut space_split = line.split(" ");
+            let mut space_split = line.split(' ');
             left_nums[i] = space_split.next().unwrap().parse().unwrap();
-            right_nums[i] = space_split.last().unwrap().parse().unwrap();
+            right_nums[i] = space_split.next_back().unwrap().parse().unwrap();
         }
 
         let mut result = 0;
