@@ -1,6 +1,8 @@
 const std = @import("std");
 
 pub fn build(b: *std.Build) void {
+    const regex = b.dependency("regex", .{});
+
     const target = b.standardTargetOptions(.{});
     const mode = b.standardOptimizeOption(.{});
 
@@ -8,7 +10,7 @@ pub fn build(b: *std.Build) void {
     const run_all = b.step("run", "Run all days");
 
     var day: u32 = 1;
-    while (day <= 2) : (day += 1) {
+    while (day <= 3) : (day += 1) {
         const dayString = b.fmt("d{:0>2}", .{day});
         const zigFile = b.fmt("src/{s}.zig", .{dayString});
 
@@ -18,6 +20,7 @@ pub fn build(b: *std.Build) void {
             .target = target,
             .optimize = mode,
         });
+        exe.root_module.addImport("regex", regex.module("regex"));
         const install_cmd = b.addInstallArtifact(exe, .{});
 
         const build_test = b.addTest(.{
@@ -25,6 +28,7 @@ pub fn build(b: *std.Build) void {
             .target = target,
             .optimize = mode,
         });
+        build_test.root_module.addImport("regex", regex.module("regex"));
         const run_test = b.addRunArtifact(build_test);
 
         {
@@ -59,6 +63,7 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = mode,
     });
+    all_tests.root_module.addImport("regex", regex.module("regex"));
     const run_all_tests = b.addRunArtifact(all_tests);
     test_all.dependOn(&run_all_tests.step);
 }
