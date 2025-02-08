@@ -31,17 +31,12 @@ impl super::Solution for Day01 {
             right_nums[i] = space_split.next_back().unwrap().parse().unwrap();
         }
 
-        let mut result = 0;
-        for l in left_nums {
-            let mut count = 0;
-            for r in right_nums {
-                if l == r {
-                    count += 1;
-                }
-            }
-            result += l * count;
-        }
-        result.to_string()
+        left_nums
+            .iter()
+            .fold(0, |acc: usize, &l| {
+                acc + l as usize * right_nums.iter().filter(|&&r| r == l).count()
+            })
+            .to_string()
     }
 }
 
