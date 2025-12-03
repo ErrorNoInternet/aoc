@@ -9,6 +9,13 @@ in
     in
     if r < 0 then r + b else r;
 
+  pow = lib.fix (
+    self: base: power:
+    if power != 0 then base * (self base (power - 1)) else 1
+  );
+
+  nextMultipleOf = n: multiple: builtins.ceil (n / multiple) * multiple;
+
   getInput =
     day:
     let
