@@ -40,5 +40,6 @@ let
   );
 in
 {
-  inherit (crosses) part1 part2;
+  part1 = builtins.toString crosses.part1;
+  part2 = builtins.toString crosses.part2;
 }
