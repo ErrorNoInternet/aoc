@@ -24,7 +24,7 @@ impl super::Solution for Day03 {
                     best = joltage;
                 }
             }
-            total += best as u64;
+            total += u64::from(best);
         }
 
         total.to_string()
@@ -61,7 +61,7 @@ impl super::Solution for Day03 {
 
             let mut joltage = 0;
             for digit in result {
-                joltage = joltage * 10 + digit as u128;
+                joltage = joltage * 10 + u128::from(digit);
             }
             total += joltage;
         }

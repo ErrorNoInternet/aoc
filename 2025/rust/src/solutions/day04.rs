@@ -17,8 +17,8 @@ fn get_accessible(map: &[Vec<char>]) -> Vec<(usize, usize)> {
                 (1, 1),
             ] {
                 let adjacent = (
-                    (x as isize + offset.0) as usize,
-                    (y as isize + offset.1) as usize,
+                    (x.cast_signed() + offset.0).cast_unsigned(),
+                    (y.cast_signed() + offset.1).cast_unsigned(),
                 );
                 if adjacent.1 < map.len()
                     && adjacent.0 < map[0].len()

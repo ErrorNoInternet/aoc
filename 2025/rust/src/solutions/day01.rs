@@ -11,7 +11,7 @@ impl super::Solution for Day01 {
 
             let delta = if dir == "L" { -dist } else { dist };
             dial = (dial + delta).rem_euclid(100);
-            crosses += (dial == 0) as i32;
+            crosses += i32::from(dial == 0);
         }
 
         crosses.to_string()
@@ -27,7 +27,7 @@ impl super::Solution for Day01 {
 
             let delta = if dir == "L" { -dist } else { dist };
             crosses += if delta < 0 {
-                (100 - dial - delta) / 100 - (dial == 0) as i32
+                (100 - dial - delta) / 100 - i32::from(dial == 0)
             } else {
                 (dial + delta) / 100
             };

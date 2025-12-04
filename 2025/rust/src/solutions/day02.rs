@@ -2,9 +2,9 @@ pub struct Day02;
 
 fn parse(input: &str) -> Vec<(u64, u64)> {
     input
-        .split(",")
+        .split(',')
         .map(|range| {
-            let (left, right) = range.trim().split_once("-").unwrap();
+            let (left, right) = range.trim().split_once('-').unwrap();
             (left.parse().unwrap(), right.parse().unwrap())
         })
         .collect()
