@@ -3,6 +3,7 @@ mod day02;
 mod day03;
 mod day04;
 mod day05;
+mod day06;
 
 pub trait Solution {
     fn part1(&self, _input: &str) -> String {
@@ -21,6 +22,7 @@ pub fn get_solver(day: usize) -> Box<dyn Solution> {
         3 => Box::new(day03::Day03),
         4 => Box::new(day04::Day04),
         5 => Box::new(day05::Day05),
+        6 => Box::new(day06::Day06),
         _ => todo!(),
     }
 }
